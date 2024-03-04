@@ -1,0 +1,32 @@
+##FACTURA
+###Ingresar una factura
+POST http://localhost:9000/apifactura/factura HTTP/1.1
+Content-Type: application/json
+
+{
+    "libro": "Harry Potter y la piedra filosofal",
+    "fechaReserva": "Febrero 7 2024", 
+    "usuario": "Daniel",
+    "precio": "10000"
+}
+
+###Traer todos las facturas
+GET http://localhost:9000/apifactura/factura HTTP/1.1
+
+###Traer un factura por su id
+GET http://localhost:9000/apifactura/factura/65e5432d27ac480fdc832e1d HTTP/1.1
+
+
+###Actualizar un factura por su id
+PUT http://localhost:9000/apifactura/factura/65e5432d27ac480fdc832e1d HTTP/1.1
+Content-Type: application/json
+
+{
+    "libro": "Harry Potter y la piedra filosofal",
+    "fechaReserva": "Febrero 7 2024", 
+    "usuario": "Daniel",
+    "precio": "10000"
+}
+
+###Eliminar factura
+DELETE http://localhost:9000/apifactura/factura/65e5432d27ac480fdc832e1d HTTP/1.1

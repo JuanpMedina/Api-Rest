@@ -33,9 +33,9 @@ routerFactura.get('/factura/:id', (req, res) => {
 //Actualizar un factura por su id
 routerFactura.put('/factura/:id', (req, res) => {
     const { id } = req.params;
-    const { fechaPedido, vendedor, total } = req.body;
+    const { libro, fechaReserva, usuario, precio } = req.body;
     facturaSchema
-        .updateOne({ _id: id }, { $set: { fechaPedido, vendedor, total } })
+        .updateOne({ _id: id }, { $set: { libro, fechaReserva, usuario, precio } })
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
