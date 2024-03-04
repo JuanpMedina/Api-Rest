@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 const userRoutes = require("./routes/libro.routes");
+const facturaRoutes = require("./routes/factura.routes")
+
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -10,6 +12,8 @@ const port = process.env.PORT || 9000;
 // Middleware
 app.use(express.json());
 app.use('/apilibro' , userRoutes);
+app.use('/apifactura', facturaRoutes);
+
 
 // routes
 app.get('/', (req, res) => {
