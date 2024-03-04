@@ -2,13 +2,14 @@ const express = require('express');
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
-const userRoutes = require("./routes/libro");
+const userRoutes = require("./routes/libro.routes");
 
 const app = express();
 const port = process.env.PORT || 9000;
 
 // Middleware
-app.use('/api' , userRoutes);
+app.use(express.json());
+app.use('/apilibro' , userRoutes);
 
 // routes
 app.get('/', (req, res) => {
