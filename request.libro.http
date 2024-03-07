@@ -4,10 +4,10 @@ POST http://localhost:9000/apilibro/libro HTTP/1.1
 Content-Type: application/json
 
 {
-    "titulo": "El código Da Vinci", 
-    "autor": "Dan Brown",
-    "paginas": "656",
-    "editorial": "Doubleday"
+    "titulo": "Pruba1", 
+    "autor": "Pruba1",
+    "paginas": "1",
+    "editorial": "Pruba1"
 }
 
 ###Traer todos los libros
@@ -18,17 +18,17 @@ GET http://localhost:9000/apilibro/libro/65e506de0571d1b605202e74 HTTP/1.1
 
 
 ###Actualizar un libro por su id
-PUT http://localhost:9000/apilibro/libro/65e4ef5220f2f365328b19c6 HTTP/1.1
+PUT http://localhost:9000/apilibro/libro/65e94ae948c1afc2451dd7c4 HTTP/1.1
 Content-Type: application/json
 
 {
-    "titulo": "Lucha libre",
-    "autor": "John Cena",
-    "paginas": "80",
-    "editorial": "WWW E"
+    "titulo": "Pruba2", 
+    "autor": "Pruba2",
+    "paginas": "2",
+    "editorial": "Pruba2"
 }
 
 ###Eliminar libro
-DELETE http://localhost:9000/apilibro/libro/65e4ef5220f2f365328b19c6 HTTP/1.1
+DELETE http://localhost:9000/apilibro/libro/65e94ae948c1afc2451dd7c4 HTTP/1.1
 
 
