@@ -81,7 +81,7 @@ describe('Libro Routes', () => {
     it('should return an error for an invalid libro ID', async () => {
         mockLibroModel.findById.mockResolvedValue(null);
 
-        const response = await request(app).get();
+        const response = await request(app).get('/apilibro/libro/invalidId');
         expect(response.statusCode).toBe(404);
         expect(response.body).toHaveProperty('error');
     });
