@@ -1,4 +1,4 @@
-name: Pipeline
+name: Pruebas
 
 on:
   push:
@@ -23,13 +23,3 @@ jobs:
 
     - name: Run tests
       run: npm run test
-
-  build:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Construir la imagen
-      run:  docker build -t devops:latest .
