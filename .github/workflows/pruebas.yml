@@ -33,7 +33,7 @@ jobs:
       run: |
         COVERAGE=$(npx jest --coverage --coverageReporters="text" | grep -o 'All files.*\([0-9\.]*\)' | grep -o '[0-9\.]*')
         echo "Total coverage: $COVERAGE%"
-        if (( $(echo "$COVERAGE < 40" | bc -l) )); then
-          echo "Coverage is below 40%"
+        if (( $(echo "$COVERAGE < 60" | bc -l) )); then
+          echo "Coverage is below 60%"
           exit 1
         fi
