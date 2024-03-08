@@ -81,7 +81,7 @@ describe('Libro Routes', () => {
     it('should return an error for an invalid libro ID', async () => {
         mockLibroModel.findById.mockResolvedValue(null);
 
-        const response = await request(app).get('/apilibro/libro/invalidId');
+        const response = await request(app).get();
         expect(response.statusCode).toBe(404);
         expect(response.body).toHaveProperty('error');
     });
@@ -89,7 +89,7 @@ describe('Libro Routes', () => {
     // Prueba para validar campos requeridos al crear un libro
     it('should fail to create a libro when required fields are missing', async () => {
         const response = await request(app)
-            .post('/apilibro/libro')
+            .post()
             .send({ autor: 'Test Autor' });
 
         expect(response.statusCode).toBe(400);
@@ -103,7 +103,7 @@ describe('Libro Routes', () => {
         );
         mockLibroModel.find.mockResolvedValue(mockLibrosResponse);
 
-        const response = await request(app).get('/apilibro/libro?titulo=Test');
+        const response = await request(app).get();
 
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual(mockLibrosResponse);
