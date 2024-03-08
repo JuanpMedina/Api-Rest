@@ -10,30 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install bc
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y bc
+      - name: Install bc (if necessary)
+        run: |
+          if ! which bc > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y bc
+          fi
 
-    - name: Run tests
-      run: npm run test --coverage
+      - name: Run tests
+        run: npm run test --coverage
 
-    - name: Check coverage
-      run: |
-        COVERAGE=$(npx jest --coverage --coverageReporters="text" | grep -o 'All files.*\([0-9\.]*\)' | grep -o '[0-9\.]*')
-        echo "Total coverage: $COVERAGE%"
-        if (( $(echo "$COVERAGE < 60" | bc -l) )); then
-          echo "Coverage is below 60%"
-          exit 1
-        fi
+      - name: Check coverage (fail on low coverage)
+        run: |
+          COVERAGE=$(npx jest --coverage --coverageReporters="text" | grep -o 'All files.*\([0-9\.]*\)' | grep -o '[0-9\.]*')
+          if [[ $(echo "$COVERAGE < 60") == true ]]; then
+            echo "Coverage is below 60%"
+            exit 1
+          fi
+          echo "Total coverage: $COVERAGE%"
