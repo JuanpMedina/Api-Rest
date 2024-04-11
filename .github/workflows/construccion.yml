@@ -15,14 +15,11 @@ jobs:
       - name: Login to Test Azure Registry
         uses: azure/docker-login@v1
         with:
-          login-server: test2dv.azurecr.io
+          login-server: testdv2.azurecr.io
           username: ${{ secrets.USER_TEST }}
           password: ${{ secrets.PASSWORD_TEST }}
 
-      - name: Build Docker image
-        run: |
-          docker build -t testdv2.azurecr.io .
-          
       - name: Push to Test Azure Registry
-        run: 
-          docker push testdv2.azurecr.io
+        run: |
+          docker build . -t testdv2.azurecr.io/test:latest
+          docker push testdv2.azurecr.io/test:latest
