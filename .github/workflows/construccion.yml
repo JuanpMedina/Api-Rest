@@ -19,8 +19,10 @@ jobs:
           username: ${{ secrets.USER_TEST }}
           password: ${{ secrets.PASSWORD_TEST }}
 
+      - name: Build Docker image
+        run: |
+          docker build -t testdv2.azurecr.io/test:latest .
           
       - name: Push to Test Azure Registry
         run: 
-          docker build . -t testdv2.azurecr.io/test:latest
           docker push testdv2.azurecr.io/test:latest
