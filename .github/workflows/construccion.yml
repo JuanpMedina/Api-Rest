@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+env:
+  DESIRED_ENVIRONMENT: production
+  TEST_ENVIRONMENT: test
+  PRODUCTION_ENVIRONMENT: production
+      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,6 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Login to Test Azure Registry
+        if: ${{ env.DESIRED_ENVIRONMENT == env.TEST_ENVIRONMENT }}
         uses: azure/docker-login@v1
         with:
           login-server: testdv2.azurecr.io
@@ -20,6 +27,21 @@ jobs:
           password: ${{ secrets.PASSWORD_TEST }}
 
       - name: Push to Test Azure Registry
+        if: ${{ env.DESIRED_ENVIRONMENT == env.TEST_ENVIRONMENT }}
         run: |
           docker build . -t testdv2.azurecr.io/test:latest
           docker push testdv2.azurecr.io/test:latest
+
+      - name: Login to Production Azure Registry
+        if: ${{ env.DESIRED_ENVIRONMENT == env.PRODUCTION_ENVIRONMENT }}
+        uses: azure/docker-login@v1
+        with:
+          login-server: productiondv2.azurecr.io
+          username: ${{ secrets.USER_PRODUCCION }}
+          password: ${{ secrets.PASSWORD_PRODUCCION }}
+
+      - name: Push to Production Azure Registry
+        if: ${{ env.DESIRED_ENVIRONMENT == env.PRODUCTION_ENVIRONMENT }}
+        run: |
+          docker build . -t productiondv2.azurecr.io/prod:latest
+          docker push productiondv2.azurecr.io/prod:latest
