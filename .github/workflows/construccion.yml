@@ -21,8 +21,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t testdv2.azurecr.io/test:latest .
+          docker build -t testdv2.azurecr.io .
           
       - name: Push to Test Azure Registry
         run: 
-          docker push testdv2.azurecr.io/test:latest
+          docker push testdv2.azurecr.io
