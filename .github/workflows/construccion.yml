@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  DESIRED_ENVIRONMENT: production
+  DESIRED_ENVIRONMENT: test
   TEST_ENVIRONMENT: test
   PRODUCTION_ENVIRONMENT: production
       
